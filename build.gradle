@@ -1,7 +1,26 @@
 group 'templates'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/libs-snapshot" }
+    }
+    dependencies {
+        classpath "org.flywaydb:flyway-gradle-plugin:3.0"
+        classpath "mysql:mysql-connector-java:5.1.37"
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'flyway'
+
+flyway {
+    driver = 'com.mysql.jdbc.Driver'
+    user = 'root'
+    password = 'admin'
+    url = 'jdbc:mysql://localhost:3307/test'
+}
 
 sourceCompatibility = 1.8
 
